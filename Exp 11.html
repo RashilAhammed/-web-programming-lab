@@ -1,0 +1,138 @@
+<html>
+<head>
+<title>Online Exam</title>
+<style>
+body {
+    background: purple;
+    text-align: center;
+    font-family: Arial;
+}
+form {
+    background: white;
+    width: 350px;
+    margin: 40px auto;
+    padding: 20px;
+    border-radius: 10px;
+}
+h2 {
+    color: purple;
+}
+.question {
+    text-align: left;
+    margin: 15px;
+}
+input[type="submit"] {
+    background: purple;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+</style>
+</head>
+<body>
+<form onsubmit="return checkAnswer()">
+<h2>Online Examination</h2>
+<p>Answer all questions</p>
+<h3 id="timer">Time Left: 10:00</h3>
+<div class="question">
+<p>1. What is the capital of India?</p>
+<input type="radio" name="q1" value="New Delhi"> New Delhi<br>
+<input type="radio" name="q1" value="Kerala"> Kerala<br>
+<input type="radio" name="q1" value="Hyderabad"> Hyberabad<br>
+</div>
+<div class="question">
+<p>2. Which is the largest planet in our solar system?</p>
+<input type="radio" name="q2" value="Mars"> Mars<br>
+<input type="radio" name="q2" value="Jupiter"> Jupiter<br>
+<input type="radio" name="q2" value="Neptune"> Neptune<br>
+</div>
+<div class="question">
+<p>3. Who is known as the Father of the Nation in India?</p>
+<input type="radio" name="q3" value="Antartic Ocean"> Antartic Ocean<br>
+<input type="radio" name="q3" value="Pacific Ocean"> Pacific Ocean<br>
+<input type="radio" name="q3" value="Indian Ocean"> Indian Ocean<br>
+</div><br>
+<div class="question">
+<p>4. Which is the largest ocean in the world?</p>
+<input type="radio" name="q4" value="Mahatma Gandhi"> Mahatma Gandhi<br>
+<input type="radio" name="q4" value="Jawaharlal Nehru"> Jawaharlal Nehru<br>
+<input type="radio" name="q4" value="Dr. B R Ambedkar"> Dr. B R Ambedkar<br>
+</div><br>
+<div class="question">
+<p>5. Which gas do plants absorb during photosynthesis?</p>
+<input type="radio" name="q5" value="Carbon dioxide"> Carbon dioxide<br>
+<input type="radio" name="q5" value="Carbon Monoxide"> Carbon Monoxide<br>
+<input type="radio" name="q5" value="Oxygen"> Oxygen<br>
+</div><br>
+<div class="question">
+<p>6. In which year did India gain independence?</p>
+<input type="radio" name="q6" value="1897"> 1897<br>
+<input type="radio" name="q6" value="1957"> 1957<br>
+<input type="radio" name="q6" value="1947"> 1947<br>
+</div><br>
+<div class="question">
+<p>7. What is the national animal of India?</p>
+<input type="radio" name="q7" value="Lion"> Lion<br>
+<input type="radio" name="q7" value="Tiger"> Tiger<br>
+<input type="radio" name="q7" value="Cheeta"> Cheeta<br>
+</div><br>
+<div class="question">
+<p>8. What is the national flower of India?</p>
+<input type="radio" name="q8" value="Lily"> Lily<br>
+<input type="radio" name="q8" value="Hibiscus"> Hibiscus<br>
+<input type="radio" name="q8" value="Lotus"> Lotus<br>
+</div><br>
+<div class="question">
+<p>9. Which Indian state is known as the Land of Five Rivers?</p>
+<input type="radio" name="q9" value="Punjab"> Punjab<br>
+<input type="radio" name="q9" value="Hariyana"> Hariyana<br>
+<input type="radio" name="q9" value="Mahi"> Mahi<br>
+</div><br>
+<div class="question">
+<p>10. Which Indian state is known as God's Own Country?</p>
+<input type="radio" name="q10" value="Odisha"> Odisha<br>
+<input type="radio" name="q10" value="Kerala"> Kerala<br>
+<input type="radio" name="q10" value="Karnataka"> Karnataka<br>
+</div><br>
+<input type="submit" value="Submit Exam">
+<h3 id="result"></h3>
+</form>
+<script>
+var time = 600;
+var submitted = false;
+var timer = setInterval(function() {
+    var min = Math.floor(time / 60);
+    var sec = time % 60;
+    document.getElementById("timer").innerHTML =
+    "Time Left: " + min + ":" + (sec < 10 ? "0" : "") + sec;
+    time--;
+    if (time < 0) {
+        clearInterval(timer);
+        alert("Time is up!");
+        checkAnswer();
+    }
+}, 1000);
+function checkAnswer() {
+    if (submitted) return false;
+    submitted = true;
+    clearInterval(timer);
+    var answers = ["New Delhi", "Jupiter", "Pacific Ocean",
+    "Mahatma Gandhi", "Carbon dioxide", "1947", "Tiger",
+    "Lotus", "Punjab", "Kerala"];
+    var score = 0;
+    for (var i = 1; i <= 10; i++) {
+        var q = document.querySelector('input[name="q' + i + '"]:checked');
+
+        if (q && q.value == answers[i-1]) {
+            score++;
+        }
+    }
+    document.getElementById("result").innerHTML =
+    "Exam Completed!<br>Your Score: " + score + "/10";
+    return false;
+}
+</script>
+</body>
+</html>
